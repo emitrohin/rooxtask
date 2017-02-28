@@ -1,10 +1,10 @@
 package ru.emitrohin.roox.model;
 
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotEmpty;
-import org.hibernate.validator.constraints.SafeHtml;
+import com.fasterxml.jackson.annotation.JsonView;
+import ru.emitrohin.roox.View;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -12,26 +12,31 @@ import java.util.List;
  */
 
 @Entity
-@Table(name = "customers", uniqueConstraints = {@UniqueConstraint(columnNames = "login", name = "users_unique_email_idx")})
+@Table(name = "customers", uniqueConstraints = {@UniqueConstraint(columnNames = "login", name = "ix_login")})
 public class Customer extends BaseEntity {
 
+    @NotNull
     private String login;
 
+    @NotNull
+    @JsonView(View.REST.class)
     private String password;
 
     @Column(name = "last_name")
+    @NotNull
     private String lastName;
 
     @Column(name = "first_name")
+    @NotNull
     private String firstName;
 
     @Column(name = "middle_name")
+    @NotNull
     private String middleName;
 
     private int balance;
 
-    @Column(name = "is_active")
-    private boolean isActive;
+    private boolean enabled = true;
 
     @OneToMany(mappedBy = "customer")
     private List<PartnerMapping> mappings;
@@ -40,14 +45,15 @@ public class Customer extends BaseEntity {
 
     }
 
-    public Customer(String login, String password, String lastName, String firstName, String middleName, int balance, boolean isActive, List<PartnerMapping> mappings) {
+    public Customer(Integer id, String login, String password, String lastName, String firstName, String middleName, int balance, boolean enabled, List<PartnerMapping> mappings) {
+        super(id);
         this.login = login;
         this.password = password;
         this.lastName = lastName;
         this.firstName = firstName;
         this.middleName = middleName;
         this.balance = balance;
-        this.isActive = isActive;
+        this.enabled = enabled;
         this.mappings = mappings;
     }
 
@@ -99,12 +105,12 @@ public class Customer extends BaseEntity {
         this.balance = balance;
     }
 
-    public boolean isActive() {
-        return isActive;
+    public boolean isEnabled() {
+        return enabled;
     }
 
-    public void setActive(boolean active) {
-        isActive = active;
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public List<PartnerMapping> getMappings() {

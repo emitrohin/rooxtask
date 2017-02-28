@@ -10,6 +10,7 @@ import javax.persistence.*;
  */
 
 @MappedSuperclass
+@Access(AccessType.FIELD)
 public class BaseEntity implements Persistable<Integer> {
 
     @Id

@@ -9,16 +9,16 @@ import javax.validation.constraints.NotNull;
  * Created by emitrokhin on 27.02.2017.
  */
 @Entity
-@Table(name = "partner_mapping", uniqueConstraints = {@UniqueConstraint(columnNames = "partner_id", name = "partner_id_idx")})
-public class PartnerMapping {
+@Table(name = "partner_mapping", uniqueConstraints = {@UniqueConstraint(columnNames = {"customer_id", "partner_id"}, name = "ix_customer_id_partner_id")})
+public class PartnerMapping extends BaseEntity{
 
     @NotEmpty
     @Column(name = "partner_id")
     private String partnerId;
 
     @NotEmpty
-    @Column(name = "customer_id")
-    private String customerId;
+    @Column(name = "partner_customer_id")
+    private String partnerCustomerId;
 
     @NotNull
     @Column(name = "last_name")
@@ -44,9 +44,10 @@ public class PartnerMapping {
     public PartnerMapping() {
     }
 
-    public PartnerMapping(String partnerId, String customerId, String lastName, String firstName, String middleName, String avatarImage) {
+    public PartnerMapping(Integer id, String partnerId, String partnerCustomerId, String lastName, String firstName, String middleName, String avatarImage) {
+        super(id);
         this.partnerId = partnerId;
-        this.customerId = customerId;
+        this.partnerCustomerId = partnerCustomerId;
         this.lastName = lastName;
         this.firstName = firstName;
         this.middleName = middleName;
@@ -62,12 +63,12 @@ public class PartnerMapping {
         this.partnerId = partnerId;
     }
 
-    public String getCustomerId() {
-        return customerId;
+    public String getPartnerCustomerId() {
+        return partnerCustomerId;
     }
 
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
+    public void setPartnerCustomerId(String partnerCustomerId) {
+        this.partnerCustomerId = partnerCustomerId;
     }
 
     public String getLastName() {
@@ -100,5 +101,13 @@ public class PartnerMapping {
 
     public void setAvatarImage(String avatarImage) {
         this.avatarImage = avatarImage;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 }
