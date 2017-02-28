@@ -42,6 +42,8 @@ public class ExceptionUtil {
 
     public static PartnerMapping checkNotFoundWithAuthorization(PartnerMapping partnerMapping, int authorizedCustomerId, String message)
     {
+        checkNotFound(partnerMapping, message);
+
         if (partnerMapping.getCustomer().getId() != authorizedCustomerId)
         {
             throw new NotFoundException("Entity wasn't found: " + message);

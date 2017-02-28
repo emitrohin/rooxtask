@@ -20,21 +20,17 @@ public class PartnerMapping extends BaseEntity{
     @Column(name = "partner_customer_id")
     private String partnerCustomerId;
 
-    @NotNull
     @Column(name = "last_name")
     private String lastName;
 
-    @NotNull
     @Column(name = "first_name")
     private String firstName;
 
-    @NotNull
     @Column(name = "middle_name")
     private String middleName;
 
-    @NotNull
     @Column(name = "avatar_image")
-    private String avatarImage;
+    private byte[]  avatarImage;
 
     @NotNull
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
@@ -44,7 +40,7 @@ public class PartnerMapping extends BaseEntity{
     public PartnerMapping() {
     }
 
-    public PartnerMapping(Integer id, String partnerId, String partnerCustomerId, String lastName, String firstName, String middleName, String avatarImage) {
+    public PartnerMapping(Integer id, String partnerId, String partnerCustomerId, String lastName, String firstName, String middleName, byte[] avatarImage, Customer customer) {
         super(id);
         this.partnerId = partnerId;
         this.partnerCustomerId = partnerCustomerId;
@@ -52,6 +48,7 @@ public class PartnerMapping extends BaseEntity{
         this.firstName = firstName;
         this.middleName = middleName;
         this.avatarImage = avatarImage;
+        this.customer = customer;
     }
 
 
@@ -95,12 +92,12 @@ public class PartnerMapping extends BaseEntity{
         this.middleName = middleName;
     }
 
-    public String getAvatarImage() {
+    public byte[] getAvatarImage() {
         return avatarImage;
     }
 
-    public void setAvatarImage(String avatarImage) {
-        this.avatarImage = avatarImage;
+    public void setAvatarImage(byte[] avatarImageByteArray) {
+        this.avatarImage = avatarImageByteArray;
     }
 
     public Customer getCustomer() {

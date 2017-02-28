@@ -18,11 +18,11 @@ import ru.emitrohin.roox.service.CustomerService;
  */
 
 @RestController
-@RequestMapping(value = BaseController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = CustomerRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class CustomerRestController extends BaseController {
 
     protected final Logger log = LoggerFactory.getLogger(getClass());
-    static final String REST_URL = "/rest/profile/meals";
+    protected static final String REST_URL = BaseController.REST_URL + "/customer";
 
     private CustomerService customerService;
 
@@ -34,14 +34,14 @@ public class CustomerRestController extends BaseController {
     @GetMapping("/{customerId}")
     public Customer get(@PathVariable("customerId") int customerId) {
         log.info("Customer get " + customerId);
-        int authorizedId = AuthorizedCustomer.id();
+        int authorizedId = 100001; //AuthorizedCustomer.id();
         return customerService.get(customerId, authorizedId);
     }
 
     @GetMapping("/@me")
     public Customer get() {
         log.info("Customer get by @me");
-        int customerId = AuthorizedCustomer.id();
-        return customerService.get(customerId);
+        int authorizedId = 100001; //AuthorizedCustomer.id();
+        return customerService.get(authorizedId);
     }
 }

@@ -1,7 +1,6 @@
 package ru.emitrohin.roox.model;
 
-import com.fasterxml.jackson.annotation.JsonView;
-import ru.emitrohin.roox.View;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -16,10 +15,11 @@ import java.util.List;
 public class Customer extends BaseEntity {
 
     @NotNull
+    @JsonIgnore
     private String login;
 
     @NotNull
-    @JsonView(View.REST.class)
+    @JsonIgnore
     private String password;
 
     @Column(name = "last_name")
@@ -38,7 +38,8 @@ public class Customer extends BaseEntity {
 
     private boolean enabled = true;
 
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
+    @JsonIgnore
     private List<PartnerMapping> mappings;
 
     public Customer(){

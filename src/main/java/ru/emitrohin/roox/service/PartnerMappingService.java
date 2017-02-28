@@ -27,7 +27,7 @@ public class PartnerMappingService {
         this.customerRepository = customerRepository;
     }
 
-    public PartnerMapping findOne(int id, int customerId){
+    public PartnerMapping get(int id, int customerId){
         return ExceptionUtil.checkNotFoundWithAuthorization(partnerMappingRepository.findOne(id), customerId, "PartnerMapping with id " + id);
     }
 
@@ -37,7 +37,7 @@ public class PartnerMappingService {
 
     public PartnerMapping save(PartnerMapping partnerMapping, int customerId){
         Assert.notNull(partnerMapping, "PartnerMapping must not be null");
-        if (!partnerMapping.isNew() && findOne(partnerMapping.getId(), customerId) == null) {
+        if (!partnerMapping.isNew() && get(partnerMapping.getId(), customerId) == null) {
             return null;
         }
         partnerMapping.setCustomer(customerRepository.findOne(customerId));
