@@ -3,7 +3,7 @@ package ru.emitrohin.roox.matcher;
 import org.junit.Assert;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.ResultMatcher;
-import ru.emitrohin.roox.TestUtil;
+import ru.emitrohin.roox.util.TestUtil;
 import ru.emitrohin.roox.web.json.JsonUtil;
 
 import java.io.UnsupportedEncodingException;
