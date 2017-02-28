@@ -28,6 +28,6 @@ CREATE TABLE partner_mapping
   middle_name         VARCHAR(255),
   avatar_image        BINARY,
 
-  CONSTRAINT ix_customer_id_partner_id UNIQUE (customer_id, partner_id),
+  CONSTRAINT ix_customer_id_partner_id UNIQUE (partner_id, partner_customer_id),
   FOREIGN KEY (customer_id) REFERENCES customers (id) ON DELETE CASCADE
 );
