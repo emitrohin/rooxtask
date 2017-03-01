@@ -19,4 +19,16 @@ public class ErrorInfo {
         this.cause = cause;
         this.details = details;
     }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public String getCause() {
+        return cause;
+    }
+
+    public String[] getDetails() {
+        return details;
+    }
 }
