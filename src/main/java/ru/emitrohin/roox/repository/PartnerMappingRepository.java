@@ -1,6 +1,7 @@
 package ru.emitrohin.roox.repository;
 
 import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 import ru.emitrohin.roox.model.PartnerMapping;
 
@@ -12,7 +13,8 @@ import java.util.List;
  */
 public interface PartnerMappingRepository extends Repository<PartnerMapping, Integer> {
 
-    PartnerMapping findOne(int id);
+    @Query("SELECT p FROM PartnerMapping p JOIN FETCH p.customer WHERE p.id = ?1 and p.customer.id = ?2")
+    PartnerMapping findOne(int id, int customerId);
 
     List<PartnerMapping> findAllByCustomerId(int customerId);
 
@@ -21,6 +23,7 @@ public interface PartnerMappingRepository extends Repository<PartnerMapping, Int
 
     @Transactional
     @Modifying
-    void delete(int id);
+    @Query("DELETE FROM PartnerMapping p WHERE p.id= ?1 AND p.customer.id= ?2")
+    void delete(int id, int customerId);
 }
 

@@ -1,9 +1,11 @@
 package ru.emitrohin.roox.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Arrays;
 
 /**
  * Created by emitrokhin on 27.02.2017.
@@ -32,9 +34,9 @@ public class PartnerMapping extends BaseEntity{
     @Column(name = "avatar_image")
     private byte[]  avatarImage;
 
-    @NotNull
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "customer_id", nullable = false)
+    @JsonIgnore
     private Customer customer;
 
     public PartnerMapping() {
@@ -106,5 +108,17 @@ public class PartnerMapping extends BaseEntity{
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    @Override
+    public String toString() {
+        return "PartnerMapping{" +
+                "partnerId='" + partnerId + '\'' +
+                ", partnerCustomerId='" + partnerCustomerId + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", middleName='" + middleName + '\'' +
+                ", avatarImage=" + Arrays.toString(avatarImage) +
+                '}';
     }
 }

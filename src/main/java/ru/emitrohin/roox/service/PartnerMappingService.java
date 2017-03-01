@@ -28,15 +28,24 @@ public class PartnerMappingService {
     }
 
     public PartnerMapping get(int id, int customerId){
-        return ExceptionUtil.checkNotFoundWithAuthorization(partnerMappingRepository.findOne(id), customerId, "PartnerMapping with id " + id);
+        return ExceptionUtil.checkNotFoundWithId(partnerMappingRepository.findOne(id, customerId), id);
     }
 
     public List<PartnerMapping> findAllByCustomerId(int customerId){
         return partnerMappingRepository.findAllByCustomerId(customerId);
     }
 
-    public PartnerMapping save(PartnerMapping partnerMapping, int customerId){
+    public PartnerMapping update(PartnerMapping partnerMapping, int customerId) {
         Assert.notNull(partnerMapping, "PartnerMapping must not be null");
+        return ExceptionUtil.checkNotFoundWithId(save(partnerMapping, customerId), partnerMapping.getId());
+    }
+
+    public PartnerMapping create(PartnerMapping partnerMapping, int customerId) {
+        Assert.notNull(partnerMapping, "PartnerMapping must not be null");
+        return save(partnerMapping, customerId);
+    }
+
+    private PartnerMapping save(PartnerMapping partnerMapping, int customerId){
         if (!partnerMapping.isNew() && get(partnerMapping.getId(), customerId) == null) {
             return null;
         }
@@ -45,7 +54,7 @@ public class PartnerMappingService {
     }
 
     public void delete(int id, int customerId){
-        ExceptionUtil.checkNotFoundWithAuthorization(partnerMappingRepository.findOne(id), customerId, "PartnerMapping with id " + id);
-        partnerMappingRepository.delete(id);
+        ExceptionUtil.checkNotFoundWithAuthorization(partnerMappingRepository.findOne(id, customerId), customerId, "PartnerMapping with id " + id);
+        partnerMappingRepository.delete(id, customerId);
     }
 }
