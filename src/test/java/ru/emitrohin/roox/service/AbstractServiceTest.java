@@ -23,6 +23,8 @@ abstract public class AbstractServiceTest {
     private static final Logger LOG = LoggerFactory.getLogger(AbstractServiceTest.class);
     private static StringBuilder results = new StringBuilder();
 
+    protected final int AUTH_ID = 100001;
+
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 

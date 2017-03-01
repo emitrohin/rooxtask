@@ -16,27 +16,28 @@ public class CustomerServiceTest extends AbstractServiceTest {
     @Autowired
     protected CustomerService customerService;
 
-    protected final int AUTH_ID = 100001;
 
     @Test
-    public void testGet() throws Exception {
+    public void testGet(){
         MATCHER.assertEquals(customerService.get(AUTH_ID), TEST_CUSTOMERS.get(1));
     }
 
     @Test
-    public void testGetAuthorized() throws Exception {
+    public void testGetAuthorized()  {
         MATCHER.assertEquals(customerService.get(AUTH_ID, AUTH_ID), TEST_CUSTOMERS.get(1));
     }
 
 
-    @Test(expected = NotFoundException.class)
-    public void testGetNotFound() throws Exception {
+    @Test
+    public void testGetNotFound() {
+        thrown.expect(NotFoundException.class);
         customerService.get(1);
     }
 
-    @Test(expected = NotFoundException.class)
-    public void testGetNotFoundUnauthorized() throws Exception {
-        customerService.get(AUTH_ID, 100002);
+    @Test
+    public void testGetNotFoundUnauthorized() {
+        thrown.expect(NotFoundException.class);
+        customerService.get(AUTH_ID, TEST_CUSTOMERS.get(2).getId());
     }
 
 

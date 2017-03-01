@@ -1,7 +1,6 @@
 package ru.emitrohin.roox.testdata;
 
 import ru.emitrohin.roox.matcher.ModelMatcher;
-import ru.emitrohin.roox.model.Customer;
 import ru.emitrohin.roox.model.PartnerMapping;
 
 import java.util.ArrayList;
@@ -41,4 +40,13 @@ public class PartnerMappingTestData {
         TEST_MAPPINGS.add(new PartnerMapping(100008, "id5", "sid5","Cool","Prog", "Master", new byte[] {0x01,0x00,0x01,0x00,0x01,0x00,0x01,0x00,0x01}, TEST_CUSTOMERS.get(1)));
         TEST_MAPPINGS.add(new PartnerMapping(100009, "id4", "sid6","China",null, null, null, TEST_CUSTOMERS.get(2)));
     }
+
+    public static PartnerMapping getCreated() {
+        return new PartnerMapping(null, "id8", "sid65","New","Active", "Person", new byte[] {0x0,0x00,0x01,0x00,0x01,0x00,0x00,0x00,0x01}, null);
+    }
+
+    public static PartnerMapping getUpdated() {
+        return new PartnerMapping(100008, "id000", "no-id","Master","Java", "Person", new byte[] {0x06,0x00,0x01,0x00,0x01,0x00,0x00,0x00,0x01}, TEST_CUSTOMERS.get(1));
+    }
+
 }

@@ -21,6 +21,6 @@ public interface PartnerMappingRepository extends Repository<PartnerMapping, Int
 
     @Transactional
     @Modifying
-    int delete(int id);
+    void delete(int id);
 }
 

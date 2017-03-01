@@ -32,6 +32,8 @@ public class ExceptionUtil {
 
     public static Customer checkNotFoundWithAuthorization(Customer customer, int authorizedCustomerId, String message)
     {
+        checkNotFound(customer, message);
+
         if (customer.getId() != authorizedCustomerId)
         {
             throw new NotFoundException("Entity wasn't found: " + message);
