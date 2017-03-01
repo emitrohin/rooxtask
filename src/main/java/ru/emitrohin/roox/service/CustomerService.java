@@ -21,14 +21,8 @@ public class CustomerService {
         this.customerRepository = customerRepository;
     }
 
-    public Customer get(int id, int authorizedCustomerId) {
-        Customer customer = customerRepository.findOne(id);
-        ExceptionUtil.checkNotFound(customer, "customer with id " + authorizedCustomerId);
-        ExceptionUtil.checkNotFoundWithAuthorization(customer, authorizedCustomerId,"customer with id " + authorizedCustomerId);
-        return customer;
-    }
-
     public Customer get(int authorizedCustomerId) {
-        return ExceptionUtil.checkNotFound(customerRepository.findOne(authorizedCustomerId), "customer with id " + authorizedCustomerId);
+        Customer customer = customerRepository.findOne(authorizedCustomerId);
+        return ExceptionUtil.checkNotFound(customer, "customer with id " + authorizedCustomerId);
     }
 }

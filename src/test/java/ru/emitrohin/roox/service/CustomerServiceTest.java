@@ -19,12 +19,7 @@ public class CustomerServiceTest extends AbstractServiceTest {
 
     @Test
     public void testGet(){
-        MATCHER.assertEquals(customerService.get(AUTH_ID), TEST_CUSTOMERS.get(1));
-    }
-
-    @Test
-    public void testGetAuthorized()  {
-        MATCHER.assertEquals(customerService.get(AUTH_ID, AUTH_ID), TEST_CUSTOMERS.get(1));
+        MATCHER.assertEquals(customerService.get(USER_ID), TEST_CUSTOMERS.get(1));
     }
 
 
@@ -33,12 +28,5 @@ public class CustomerServiceTest extends AbstractServiceTest {
         thrown.expect(NotFoundException.class);
         customerService.get(1);
     }
-
-    @Test
-    public void testGetNotFoundUnauthorized() {
-        thrown.expect(NotFoundException.class);
-        customerService.get(AUTH_ID, TEST_CUSTOMERS.get(2).getId());
-    }
-
 
 }

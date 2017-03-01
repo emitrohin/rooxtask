@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.emitrohin.roox.AuthorizedCustomer;
 import ru.emitrohin.roox.model.Customer;
 import ru.emitrohin.roox.service.CustomerService;
+import ru.emitrohin.roox.util.exception.NotFoundException;
 
 /**
  * Author: E_Mitrohin
@@ -19,10 +19,9 @@ import ru.emitrohin.roox.service.CustomerService;
 
 @RestController
 @RequestMapping(value = CustomerRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
-public class CustomerRestController extends BaseController {
+public class CustomerRestController extends BaseRestController {
 
-    protected final Logger log = LoggerFactory.getLogger(getClass());
-    protected static final String REST_URL = BaseController.REST_URL + "/customer";
+    public static final String REST_URL = BaseRestController.REST_URL + "/customer";
 
     private CustomerService customerService;
 
@@ -33,15 +32,18 @@ public class CustomerRestController extends BaseController {
 
     @GetMapping("/{customerId}")
     public Customer get(@PathVariable("customerId") int customerId) {
-        log.info("Customer get " + customerId);
-        int authorizedId = 100001; //AuthorizedCustomer.id();
-        return customerService.get(customerId, authorizedId);
+        LOG.info("Customer get {}", customerId);
+        if (customerId != 100001) //AuthorizedCustomer.id();
+        {
+            throw new NotFoundException("");
+        }
+        return customerService.get(customerId);
     }
 
     @GetMapping("/@me")
     public Customer get() {
-        log.info("Customer get by @me");
         int authorizedId = 100001; //AuthorizedCustomer.id();
+        LOG.info("Customer get by @me id {} ", authorizedId);
         return customerService.get(authorizedId);
     }
 }
