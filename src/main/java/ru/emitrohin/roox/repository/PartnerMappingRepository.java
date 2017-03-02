@@ -24,6 +24,6 @@ public interface PartnerMappingRepository extends Repository<PartnerMapping, Int
     @Transactional
     @Modifying
     @Query("DELETE FROM PartnerMapping p WHERE p.id= ?1 AND p.customer.id= ?2")
-    void delete(int id, int customerId);
+    int delete(int id, int customerId);
 }
 

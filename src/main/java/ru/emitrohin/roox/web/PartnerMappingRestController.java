@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.emitrohin.roox.model.PartnerMapping;
+import ru.emitrohin.roox.security.AuthorizedCustomer;
 import ru.emitrohin.roox.service.PartnerMappingService;
 
 import javax.validation.Valid;
@@ -37,7 +38,7 @@ public class PartnerMappingRestController extends BaseRestController {
 
     @GetMapping("/@me/partner-mappings")
     public List<PartnerMapping> getAll() {
-        int authorizedId = 100001; //AuthorizedCustomer.id();
+        int authorizedId = AuthorizedCustomer.id();
         LOG.info("Get all partner mapping by @me id {}", authorizedId);
         return partnerMappingService.findAllByCustomerId(authorizedId);
     }
@@ -51,7 +52,7 @@ public class PartnerMappingRestController extends BaseRestController {
 
     @GetMapping("/@me/partner-mappings/{mappingId}")
     public PartnerMapping get(@PathVariable("mappingId") int mappingId) {
-        int authorizedId = 100001; //AuthorizedCustomer.id();
+        int authorizedId = AuthorizedCustomer.id();
         LOG.info("Get partner mapping {} by @me id {}", mappingId, authorizedId);
         return partnerMappingService.get(mappingId, authorizedId);
     }
@@ -65,7 +66,7 @@ public class PartnerMappingRestController extends BaseRestController {
 
     @PostMapping(value = "/@me/partner-mappings", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<PartnerMapping> create(@Valid @RequestBody PartnerMapping partnerMapping) {
-        int authorizedId = 100001; //AuthorizedCustomer.id();
+        int authorizedId = AuthorizedCustomer.id();
         LOG.info("Create partner mapping  {} by @me id {}", partnerMapping, authorizedId);
         return createResponseEntity(partnerMapping, authorizedId);
     }
@@ -83,17 +84,19 @@ public class PartnerMappingRestController extends BaseRestController {
     }
 
 
-    @PutMapping(value = "/{customerId}/partner-mappings", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void update(@Valid @RequestBody PartnerMapping partnerMapping, @PathVariable("customerId") int customerId) {
+    @PutMapping(value = "/{customerId}/partner-mappings/{mappingId}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void update(@Valid @RequestBody PartnerMapping partnerMapping, @PathVariable("customerId") int customerId, @PathVariable("mappingId") int mappingId) {
         checkAuthorizedId(customerId);
+        partnerMapping.setId(mappingId);
         LOG.info("Update partner mapping {} for Customer {}", partnerMapping, customerId);
         partnerMappingService.update(partnerMapping, customerId);
     }
 
-    @PutMapping(value = "/@me/partner-mappings", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void update(@Valid @RequestBody PartnerMapping partnerMapping) {
-        int authorizedId = 100001; //AuthorizedCustomer.id();
-        LOG.info("Update partner mapping {}  by @me id {}", partnerMapping, authorizedId);
+    @PutMapping(value = "/@me/partner-mappings/{mappingId}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void update(@Valid @RequestBody PartnerMapping partnerMapping, @PathVariable("mappingId") int mappingId) {
+        int authorizedId = AuthorizedCustomer.id();
+        partnerMapping.setId(mappingId);
+        LOG.info("Update partner mapping {} by @me id {}", partnerMapping, authorizedId);
         partnerMappingService.update(partnerMapping, authorizedId);
     }
 
@@ -106,7 +109,7 @@ public class PartnerMappingRestController extends BaseRestController {
 
     @DeleteMapping("/@me/partner-mappings/{mappingId}")
     public void delete(@PathVariable("mappingId") int mappingId) {
-        int authorizedId = 100001; //AuthorizedCustomer.id();
+        int authorizedId = AuthorizedCustomer.id();
         LOG.info("Delete partner mapping {} by @me id {}", mappingId, authorizedId);
         partnerMappingService.delete(mappingId, authorizedId);
     }

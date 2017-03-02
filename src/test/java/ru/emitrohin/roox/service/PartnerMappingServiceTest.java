@@ -2,6 +2,7 @@ package ru.emitrohin.roox.service;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.Assert;
 import ru.emitrohin.roox.model.PartnerMapping;
 import ru.emitrohin.roox.util.exception.NotFoundException;
 
@@ -59,13 +60,13 @@ public class PartnerMappingServiceTest extends AbstractServiceTest {
     }
 
     @Test
-    public void testDeleteNotFound() {
+    public void testDeleteUnknownId() {
         thrown.expect(NotFoundException.class);
         partnerMappingService.delete(UNKNOWN_ID, CUSTOMER_ID);
     }
 
     @Test
-    public void testDeleteNotFoundUnauthorized() {
+    public void testDeleteUnauthorized() {
         thrown.expect(NotFoundException.class);
         partnerMappingService.delete(TEST_MAPPINGS.get(0).getId(), CUSTOMER_ID);
     }

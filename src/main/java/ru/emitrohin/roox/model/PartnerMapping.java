@@ -53,6 +53,18 @@ public class PartnerMapping extends BaseEntity{
         this.customer = customer;
     }
 
+    public static PartnerMapping from(PartnerMapping partnerMapping)
+    {
+        return new PartnerMapping(
+                partnerMapping.getId(),
+                partnerMapping.getPartnerId(),
+                partnerMapping.getPartnerCustomerId(),
+                partnerMapping.getLastName(),
+                partnerMapping.getFirstName(),
+                partnerMapping.getMiddleName(),
+                partnerMapping.getAvatarImage(),
+                partnerMapping.getCustomer());
+    }
 
     public String getPartnerId() {
         return partnerId;

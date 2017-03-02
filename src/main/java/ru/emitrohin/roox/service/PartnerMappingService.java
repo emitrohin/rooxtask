@@ -54,7 +54,6 @@ public class PartnerMappingService {
     }
 
     public void delete(int id, int customerId){
-        ExceptionUtil.checkNotFoundWithAuthorization(partnerMappingRepository.findOne(id, customerId), customerId, "PartnerMapping with id " + id);
-        partnerMappingRepository.delete(id, customerId);
+        ExceptionUtil.checkNotFoundWithId(partnerMappingRepository.delete(id, customerId) != 0, id);
     }
 }
