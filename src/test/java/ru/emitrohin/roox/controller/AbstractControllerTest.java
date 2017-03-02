@@ -10,6 +10,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
+import ru.emitrohin.roox.security.TokenAuthenticationFilter;
+import ru.emitrohin.roox.service.CustomerService;
 
 import javax.annotation.PostConstruct;
 
@@ -20,6 +22,7 @@ import javax.annotation.PostConstruct;
 abstract public class AbstractControllerTest {
 
     protected final int CUSTOMER_ID = 100001;
+    protected final String LITERAL_STRING = "@me/";
 
     private static final CharacterEncodingFilter CHARACTER_ENCODING_FILTER = new CharacterEncodingFilter();
 
@@ -33,12 +36,16 @@ abstract public class AbstractControllerTest {
     @Autowired
     private WebApplicationContext webApplicationContext;
 
+    @Autowired
+    private CustomerService customerService;
+
+
     @PostConstruct
     private void postConstruct() {
         mockMvc = MockMvcBuilders
                 .webAppContextSetup(webApplicationContext)
                 .addFilter(CHARACTER_ENCODING_FILTER)
-                //.apply(springSecurity())
+                .addFilter(new TokenAuthenticationFilter(customerService))
                 .build();
     }
 }

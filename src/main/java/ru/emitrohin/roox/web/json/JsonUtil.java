@@ -13,7 +13,6 @@ import java.util.List;
  */
 public class JsonUtil {
 
-
     private static ObjectMapper jacksonObjectMapper = new ObjectMapper();
 
     public static <T> List<T> readValues(String json, Class<T> clazz) {
