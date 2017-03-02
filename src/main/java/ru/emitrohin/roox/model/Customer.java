@@ -58,6 +58,12 @@ public class Customer extends BaseEntity {
         this.mappings = mappings;
     }
 
+    public static Customer fromCustomer(Customer customer)
+    {
+        return new Customer(customer.getId(), customer.getLogin(), customer.getPassword(), customer.getLastName(), customer.getFirstName(), customer.getMiddleName(), customer.getBalance(), customer.isEnabled(), customer.getMappings());
+    }
+
+
     public String getLogin() {
         return login;
     }

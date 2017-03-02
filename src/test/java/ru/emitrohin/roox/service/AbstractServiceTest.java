@@ -14,7 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 abstract public class AbstractServiceTest {
 
-    protected final int USER_ID = 100001;
+    protected final int CUSTOMER_ID = 100001;
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();

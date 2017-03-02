@@ -6,11 +6,13 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import ru.emitrohin.roox.util.exception.ErrorInfo;
 import ru.emitrohin.roox.util.exception.NotFoundException;
@@ -39,7 +41,7 @@ public class ExceptionController {
     @ExceptionHandler(DataIntegrityViolationException.class)
     @Order(Ordered.HIGHEST_PRECEDENCE + 1)
     public ErrorInfo conflict(HttpServletRequest req, DataIntegrityViolationException e) {
-        return logAndGetErrorInfo(req, e, true);
+        return logAndGetErrorInfo(req, e, false);
     }
 
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)  // 400
@@ -71,7 +73,7 @@ public class ExceptionController {
         return new ErrorInfo(req.getRequestURL(), "ValidationException", details);
     }
 
-    public ErrorInfo logAndGetErrorInfo(HttpServletRequest req, Exception e, boolean logException) {
+    private ErrorInfo logAndGetErrorInfo(HttpServletRequest req, Exception e, boolean logException) {
         if (logException) {
             LOG.error("Exception at request " + req.getRequestURL(), e);
         } else {

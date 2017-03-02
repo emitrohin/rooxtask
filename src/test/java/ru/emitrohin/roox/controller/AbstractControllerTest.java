@@ -1,7 +1,5 @@
 package ru.emitrohin.roox.controller;
 
-import org.junit.Rule;
-import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,7 +19,7 @@ import javax.annotation.PostConstruct;
 @SpringBootTest
 abstract public class AbstractControllerTest {
 
-    protected final int USER_ID = 100001;
+    protected final int CUSTOMER_ID = 100001;
 
     private static final CharacterEncodingFilter CHARACTER_ENCODING_FILTER = new CharacterEncodingFilter();
 

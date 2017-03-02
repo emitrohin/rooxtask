@@ -1,9 +1,12 @@
 package ru.emitrohin.roox.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ru.emitrohin.roox.model.Customer;
 import ru.emitrohin.roox.repository.CustomerRepository;
+import ru.emitrohin.roox.security.AuthorizedCustomer;
 import ru.emitrohin.roox.util.exception.ExceptionUtil;
 
 /**
@@ -12,7 +15,7 @@ import ru.emitrohin.roox.util.exception.ExceptionUtil;
  */
 
 @Service
-public class CustomerService {
+public class CustomerService implements UserDetailsService {
 
     private CustomerRepository customerRepository;
 
@@ -24,5 +27,14 @@ public class CustomerService {
     public Customer get(int authorizedCustomerId) {
         Customer customer = customerRepository.findOne(authorizedCustomerId);
         return ExceptionUtil.checkNotFound(customer, "customer with id " + authorizedCustomerId);
+    }
+
+    @Override
+    public AuthorizedCustomer loadUserByUsername(String login) throws UsernameNotFoundException {
+        Customer customer = customerRepository.findByLogin(login.toLowerCase());
+        if (customer == null) {
+            throw new UsernameNotFoundException("User " + customer + " is not found");
+        }
+        return new AuthorizedCustomer(customer);
     }
 }

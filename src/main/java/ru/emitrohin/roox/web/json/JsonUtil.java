@@ -3,7 +3,6 @@ package ru.emitrohin.roox.web.json;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectReader;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 import java.util.List;
@@ -14,8 +13,8 @@ import java.util.List;
  */
 public class JsonUtil {
 
-    @Autowired
-    private static ObjectMapper jacksonObjectMapper;
+
+    private static ObjectMapper jacksonObjectMapper = new ObjectMapper();
 
     public static <T> List<T> readValues(String json, Class<T> clazz) {
         ObjectReader reader = jacksonObjectMapper.readerFor(clazz);

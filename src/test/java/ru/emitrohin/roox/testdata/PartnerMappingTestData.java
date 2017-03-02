@@ -24,7 +24,7 @@ public class PartnerMappingTestData {
                             Objects.equals(expected.getId(), actual.getId())
                                     && Objects.equals(expected.getPartnerId(), actual.getPartnerId())
                                     && Objects.equals(expected.getPartnerCustomerId(), actual.getPartnerCustomerId())
-                                    && Objects.equals(expected.getCustomer().getId(), actual.getCustomer().getId())
+                                    //&& Objects.equals(expected.getCustomer().getId(), actual.getCustomer().getId())
                                     && Objects.equals(expected.getFirstName(), actual.getFirstName())
                                     && Objects.equals(expected.getLastName(), actual.getLastName())
                                     && Objects.equals(expected.getMiddleName(), actual.getMiddleName())

@@ -19,7 +19,7 @@ public class CustomerServiceTest extends AbstractServiceTest {
 
     @Test
     public void testGet(){
-        MATCHER.assertEquals(customerService.get(USER_ID), TEST_CUSTOMERS.get(1));
+        MATCHER.assertEquals(customerService.get(CUSTOMER_ID), TEST_CUSTOMERS.get(1));
     }
 
 

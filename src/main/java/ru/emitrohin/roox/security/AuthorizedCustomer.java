@@ -1,4 +1,4 @@
-package ru.emitrohin.roox;
+package ru.emitrohin.roox.security;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,7 +22,7 @@ public class AuthorizedCustomer extends User {
         this.customer = customer;
     }
 
-    public static AuthorizedCustomer safeGet() {
+    private static AuthorizedCustomer safeGet() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth == null) {
             return null;

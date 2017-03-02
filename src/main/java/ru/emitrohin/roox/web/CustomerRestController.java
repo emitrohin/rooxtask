@@ -1,7 +1,5 @@
 package ru.emitrohin.roox.web;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,6 +28,11 @@ public class CustomerRestController extends BaseRestController {
         this.customerService = customerService;
     }
 
+    /**
+     *
+     * @param customerId
+     * @return
+     */
     @GetMapping("/{customerId}")
     public Customer get(@PathVariable("customerId") int customerId) {
         LOG.info("Customer get {}", customerId);

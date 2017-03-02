@@ -8,4 +8,6 @@ import ru.emitrohin.roox.model.Customer;
  */
 public interface CustomerRepository extends Repository<Customer, Integer> {
     Customer findOne(int customerId);
+
+    Customer findByLogin(String login);
 }
