@@ -1,9 +1,10 @@
-package ru.emitrohin.roox.security.t;
+package ru.emitrohin.roox.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import ru.emitrohin.roox.service.CustomerService;
 
@@ -23,12 +24,19 @@ public class TokenAuthenticationConfiguration extends WebSecurityConfigurerAdapt
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                .and().antMatcher("/**").addFilterBefore(new AuthenticationFilter(customerService), BasicAuthenticationFilter.class)
+
+        http.sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+        http.csrf().disable();
+
+        http.authorizeRequests()
+                .and().antMatcher("/**").addFilterBefore(new TokenAuthenticationFilter(customerService), BasicAuthenticationFilter.class)
                 .authenticationProvider(tokenAuthenticationProvider)
                 .authorizeRequests().antMatchers("/**").authenticated()
                 .and().authorizeRequests()
                 .anyRequest().denyAll();
+
+
     }
 }

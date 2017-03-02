@@ -1,4 +1,4 @@
-package ru.emitrohin.roox.security.t;
+package ru.emitrohin.roox.security;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
