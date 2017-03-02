@@ -19,14 +19,16 @@ public class CustomerControllerTest extends AbstractControllerTest {
 
     private static final String REST_URL = CustomerRestController.REST_URL + '/';
 
+    //customerId tests
+
     @Test
-    public void testGet() throws Exception {
+    public void testGetById() throws Exception {
         Customer filteredCustomer = Customer.fromCustomer(TEST_CUSTOMERS.get(1));
         filteredCustomer.setLogin(null);
         filteredCustomer.setPassword(null);
 
-        mockMvc.perform(get(REST_URL + CUSTOMER_ID))
-                //.with(userHttpBasic(ADMIN)))
+        mockMvc.perform(get(REST_URL + CUSTOMER_ID)
+                .header("Authorization", "Bearer " + CUSTOMER_ID))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(MATCHER.contentMatcher(filteredCustomer));
@@ -34,17 +36,30 @@ public class CustomerControllerTest extends AbstractControllerTest {
 
 
     @Test
-    public void testGetNotFound() throws Exception {
+    public void testGetByIdNotFound() throws Exception {
         int impossibleId = CUSTOMER_ID + 100;
-        mockMvc.perform(get(REST_URL + impossibleId))
+        mockMvc.perform(get(REST_URL + impossibleId)
+                .header("Authorization", "Bearer " + CUSTOMER_ID))
                 .andExpect(status().isNotFound());
     }
 
 
-    @Test //Сделать авторизацию, чтобы проверить
-    public void testGetNotFoundWhenUnauthorized() throws Exception {
+    @Test
+    public void testGetByIdUnauthorized() throws Exception {
         mockMvc.perform(get(REST_URL + (CUSTOMER_ID + 100)))
-                .andExpect(status().isNotFound());
+                .andExpect(status().isUnauthorized());
     }
 
+    @Test
+    public void testGetByMe() throws Exception {
+        Customer filteredCustomer = Customer.fromCustomer(TEST_CUSTOMERS.get(1));
+        filteredCustomer.setLogin(null);
+        filteredCustomer.setPassword(null);
+
+        mockMvc.perform(get(REST_URL + LITERAL_STRING)
+                .header("Authorization", "Bearer " + CUSTOMER_ID))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(MATCHER.contentMatcher(filteredCustomer));
+    }
 }

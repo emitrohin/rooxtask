@@ -37,4 +37,12 @@ public class CustomerService implements UserDetailsService {
         }
         return new AuthorizedCustomer(customer);
     }
+
+    public AuthorizedCustomer loadUserById(int id) throws UsernameNotFoundException {
+        Customer customer = get(id);
+        if (customer == null) {
+            throw new UsernameNotFoundException("User " + customer + " is not found");
+        }
+        return new AuthorizedCustomer(customer);
+    }
 }
