@@ -11,6 +11,10 @@
 In memory database is initialized each time you run it
 Unauthorized access is prohibited
 
+If you need jar then run
+
+    $ mvn package
+
 ## Token
 
 This application is based on custom token authorization. Header and token format is "Authorization: Bearer <id of customer>". For example, "Authorization: Bearer 100001"
