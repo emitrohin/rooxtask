@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.data.rest.RepositoryRestMvcAutoCon
 import org.springframework.boot.autoconfigure.web.ErrorMvcAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @ComponentScan("ru.emitrohin.roox")
 @EnableJpaRepositories("ru.emitrohin.roox.repository")

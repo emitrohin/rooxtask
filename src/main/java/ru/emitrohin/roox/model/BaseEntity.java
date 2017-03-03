@@ -18,13 +18,13 @@ public class BaseEntity implements Persistable<Integer> {
     @SequenceGenerator(name = "global_seq", sequenceName = "global_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "global_seq")
     @Access(value = AccessType.PROPERTY)
-    protected Integer id;
+    private Integer id;
 
-    public BaseEntity() {
+    BaseEntity() {
 
     }
 
-    protected BaseEntity(Integer id) {
+    BaseEntity(Integer id) {
         this.id = id;
     }
 

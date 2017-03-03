@@ -14,7 +14,7 @@ import static ru.emitrohin.roox.testdata.CustomerTestData.TEST_CUSTOMERS;
 public class CustomerServiceTest extends AbstractServiceTest {
 
     @Autowired
-    protected CustomerService customerService;
+    private CustomerService customerService;
 
 
     @Test

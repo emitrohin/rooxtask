@@ -21,8 +21,8 @@ import javax.annotation.PostConstruct;
 @SpringBootTest
 abstract public class AbstractControllerTest {
 
-    protected final int CUSTOMER_ID = 100001;
-    protected final String LITERAL_STRING = "@me/";
+    final int CUSTOMER_ID = 100001;
+    final String LITERAL_STRING = "@me/";
 
     private static final CharacterEncodingFilter CHARACTER_ENCODING_FILTER = new CharacterEncodingFilter();
 
@@ -31,14 +31,13 @@ abstract public class AbstractControllerTest {
         CHARACTER_ENCODING_FILTER.setForceEncoding(true);
     }
 
-    protected MockMvc mockMvc;
+    MockMvc mockMvc;
 
     @Autowired
     private WebApplicationContext webApplicationContext;
 
     @Autowired
     private CustomerService customerService;
-
 
     @PostConstruct
     private void postConstruct() {

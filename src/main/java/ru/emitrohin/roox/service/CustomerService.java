@@ -33,7 +33,7 @@ public class CustomerService implements UserDetailsService {
     public AuthorizedCustomer loadUserByUsername(String login) throws UsernameNotFoundException {
         Customer customer = customerRepository.findByLogin(login.toLowerCase());
         if (customer == null) {
-            throw new UsernameNotFoundException("User " + customer + " is not found");
+            throw new UsernameNotFoundException("User " + login + " is not found");
         }
         return new AuthorizedCustomer(customer);
     }
@@ -41,7 +41,7 @@ public class CustomerService implements UserDetailsService {
     public AuthorizedCustomer loadUserById(int id) throws UsernameNotFoundException {
         Customer customer = get(id);
         if (customer == null) {
-            throw new UsernameNotFoundException("User " + customer + " is not found");
+            throw new UsernameNotFoundException("User " + id + " is not found");
         }
         return new AuthorizedCustomer(customer);
     }

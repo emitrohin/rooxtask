@@ -21,7 +21,7 @@ public class ExceptionUtil {
         return object;
     }
 
-    public static void checkNotFound(boolean found, String message) {
+    private static void checkNotFound(boolean found, String message) {
         if (!found) {
             throw new NotFoundException("Entity wasn't found: " + message);
         }

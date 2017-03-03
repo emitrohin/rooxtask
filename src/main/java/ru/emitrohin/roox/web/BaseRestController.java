@@ -10,10 +10,10 @@ import ru.emitrohin.roox.util.exception.NotFoundException;
  * Date:   28.02.2017.
  */
 abstract class BaseRestController {
-    static final String REST_URL = "/api/v1.0";
-    protected final static Logger LOG = LoggerFactory.getLogger(BaseRestController.class);
+    private static final String REST_URL = "/api/v1.0";
+    final static Logger LOG = LoggerFactory.getLogger(BaseRestController.class);
 
-    protected void checkAuthorizedId(int customerId) {
+    void checkAuthorizedId(int customerId) {
         if (customerId != AuthorizedCustomer.id())
         {
             throw new NotFoundException("");

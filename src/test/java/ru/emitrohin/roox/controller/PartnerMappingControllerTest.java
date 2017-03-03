@@ -29,10 +29,10 @@ import static ru.emitrohin.roox.testdata.PartnerMappingTestData.TEST_MAPPINGS;
 public class PartnerMappingControllerTest extends AbstractControllerTest {
 
     private static final String REST_URL = CustomerRestController.REST_URL + '/';
-    private static int MAPPING_ID = 100008;
+    private static final int MAPPING_ID = 100008;
 
     @Autowired
-    protected PartnerMappingService partnerMappingService;
+    private PartnerMappingService partnerMappingService;
 
     //get all tests
 

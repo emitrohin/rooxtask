@@ -8,8 +8,8 @@ import ru.emitrohin.roox.web.json.JsonUtil;
  * GKislin
  * 05.01.2015.
  */
-abstract public class TestMatcher<T> extends BaseMatcher<String> {
-    protected T expected;
+abstract class TestMatcher<T> extends BaseMatcher<String> {
+    private final T expected;
 
     public TestMatcher(T expected) {
         this.expected = expected;

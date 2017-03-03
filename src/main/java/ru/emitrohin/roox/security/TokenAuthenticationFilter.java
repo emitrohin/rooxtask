@@ -3,7 +3,6 @@ package ru.emitrohin.roox.security;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.filter.OncePerRequestFilter;
 import ru.emitrohin.roox.service.CustomerService;
 import ru.emitrohin.roox.util.exception.ErrorInfo;
@@ -22,7 +21,7 @@ import java.io.IOException;
  */
 public class TokenAuthenticationFilter extends OncePerRequestFilter {
 
-    private CustomerService customerService;
+    private final CustomerService customerService;
 
     public TokenAuthenticationFilter(CustomerService customerService) {
         this.customerService = customerService;

@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.emitrohin.roox.model.Customer;
 import ru.emitrohin.roox.security.AuthorizedCustomer;
 import ru.emitrohin.roox.service.CustomerService;
-import ru.emitrohin.roox.util.exception.NotFoundException;
 
 /**
  * Author: E_Mitrohin
@@ -22,7 +21,7 @@ public class CustomerRestController extends BaseRestController {
 
     public static final String REST_URL = BaseRestController.REST_URL + "/customers";
 
-    private CustomerService customerService;
+    private final CustomerService customerService;
 
     @Autowired
     public CustomerRestController(CustomerService customerService) {

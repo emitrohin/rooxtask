@@ -15,7 +15,7 @@ import static java.util.Objects.requireNonNull;
  */
 public class AuthorizedCustomer extends User {
 
-    private Customer customer;
+    private final Customer customer;
 
     public AuthorizedCustomer(Customer customer) {
         super(customer.getLogin(), customer.getPassword(), customer.isEnabled(), true, true, true, Collections.emptyList());
@@ -31,7 +31,7 @@ public class AuthorizedCustomer extends User {
         return (principal instanceof AuthorizedCustomer) ? (AuthorizedCustomer) principal : null;
     }
 
-    public static AuthorizedCustomer get() {
+    private static AuthorizedCustomer get() {
         AuthorizedCustomer customer = safeGet();
         requireNonNull(customer, "No authorized customer was found");
         return customer;

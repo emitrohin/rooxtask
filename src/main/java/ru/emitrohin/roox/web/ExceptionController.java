@@ -28,7 +28,7 @@ import java.util.Arrays;
 @ControllerAdvice
 @RestController
 public class ExceptionController {
-    Logger LOG = LoggerFactory.getLogger(ExceptionController.class);
+    private final Logger LOG = LoggerFactory.getLogger(ExceptionController.class);
 
     @ResponseStatus(value = HttpStatus.NOT_FOUND) // 404
     @ExceptionHandler(NotFoundException.class)

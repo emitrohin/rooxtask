@@ -2,7 +2,6 @@ package ru.emitrohin.roox.security;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import ru.emitrohin.roox.security.AuthorizedCustomer;
 
 import java.util.Collection;
 
@@ -10,11 +9,11 @@ import java.util.Collection;
  * Author: E_Mitrohin
  * Date:   02.03.2017.
  */
-public class TokenAuthentication implements Authentication {
+class TokenAuthentication implements Authentication {
 
-    private String token;
+    private final String token;
     private boolean isAuthenticated;
-    private AuthorizedCustomer principal;
+    private final AuthorizedCustomer principal;
 
 
     public TokenAuthentication(String token, boolean isAuthenticated, AuthorizedCustomer principal) {
@@ -59,9 +58,5 @@ public class TokenAuthentication implements Authentication {
             return principal.getUsername();
         else
             return null;
-    }
-
-    public String getToken() {
-        return token;
     }
 }

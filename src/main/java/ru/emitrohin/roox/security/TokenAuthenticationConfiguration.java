@@ -16,11 +16,15 @@ import ru.emitrohin.roox.service.CustomerService;
 @EnableWebSecurity
 public class TokenAuthenticationConfiguration extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private TokenAuthenticationProvider tokenAuthenticationProvider;
+    private final TokenAuthenticationProvider tokenAuthenticationProvider;
+
+    private final CustomerService customerService;
 
     @Autowired
-    private CustomerService customerService;
+    public TokenAuthenticationConfiguration(TokenAuthenticationProvider tokenAuthenticationProvider, CustomerService customerService) {
+        this.tokenAuthenticationProvider = tokenAuthenticationProvider;
+        this.customerService = customerService;
+    }
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
