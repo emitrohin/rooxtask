@@ -3,7 +3,7 @@ package ru.emitrohin.roox.service;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.emitrohin.roox.model.PartnerMapping;
-import ru.emitrohin.roox.util.exception.NotFoundException;
+import ru.emitrohin.roox.util.NotFoundException;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -18,10 +18,9 @@ import static ru.emitrohin.roox.testdata.PartnerMappingTestData.*;
  */
 public class PartnerMappingServiceTest extends AbstractServiceTest {
 
+    private final int UNKNOWN_ID = 25;
     @Autowired
     private PartnerMappingService partnerMappingService;
-
-    private final int UNKNOWN_ID = 25;
 
     @Test
     public void testGet() {

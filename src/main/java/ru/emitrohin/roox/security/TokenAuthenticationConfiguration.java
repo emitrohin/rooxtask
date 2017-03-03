@@ -9,10 +9,11 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 import ru.emitrohin.roox.service.CustomerService;
 
 /**
- * Author: E_Mitrohin
- * Date:   02.03.2017.
+ * Class for custom token authentication configuration.
+ * Configures access to all resources, session, csrf
+ *
+ * @author Evgeniy Mitrokhin
  */
-
 @EnableWebSecurity
 public class TokenAuthenticationConfiguration extends WebSecurityConfigurerAdapter {
 
@@ -26,6 +27,13 @@ public class TokenAuthenticationConfiguration extends WebSecurityConfigurerAdapt
         this.customerService = customerService;
     }
 
+    /**
+     * This method sets SessionCreationPolicy to stateless, disables csrf, adds TokenAuthenticationFilter before
+     * BasicAuthenticationFilter and applies it to all resources
+     *
+     * @param http
+     * @throws Exception
+     */
     @Override
     public void configure(HttpSecurity http) throws Exception {
 

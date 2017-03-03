@@ -5,8 +5,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 import ru.emitrohin.roox.service.CustomerService;
-import ru.emitrohin.roox.util.exception.ErrorInfo;
-import ru.emitrohin.roox.util.exception.ExceptionUtil;
+import ru.emitrohin.roox.util.ErrorInfo;
+import ru.emitrohin.roox.util.ExceptionUtil;
 import ru.emitrohin.roox.web.json.JsonUtil;
 
 import javax.servlet.FilterChain;
@@ -16,8 +16,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Author: E_Mitrohin
- * Date:   02.03.2017.
+ * Class for custom token authentication filter to process authorization header.
+ *
+ * Implementation note: header formar "Authorization: Bearer 'customerId'"
+ *
+ * @author Evgeniy Mitrokhin
  */
 public class TokenAuthenticationFilter extends OncePerRequestFilter {
 

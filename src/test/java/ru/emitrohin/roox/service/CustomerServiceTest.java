@@ -2,7 +2,7 @@ package ru.emitrohin.roox.service;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import ru.emitrohin.roox.util.exception.NotFoundException;
+import ru.emitrohin.roox.util.NotFoundException;
 
 import static ru.emitrohin.roox.testdata.CustomerTestData.MATCHER;
 import static ru.emitrohin.roox.testdata.CustomerTestData.TEST_CUSTOMERS;

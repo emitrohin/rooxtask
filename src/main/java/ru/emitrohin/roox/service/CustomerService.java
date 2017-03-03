@@ -7,13 +7,13 @@ import org.springframework.stereotype.Service;
 import ru.emitrohin.roox.model.Customer;
 import ru.emitrohin.roox.repository.CustomerRepository;
 import ru.emitrohin.roox.security.AuthorizedCustomer;
-import ru.emitrohin.roox.util.exception.ExceptionUtil;
+import ru.emitrohin.roox.util.ExceptionUtil;
 
 /**
- * Author: E_Mitrohin
- * Date:   28.02.2017.
+ * Service layer for customer
+ *
+ * @author Evgeniy Mitrokhin
  */
-
 @Service
 public class CustomerService implements UserDetailsService {
 

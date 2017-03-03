@@ -6,15 +6,15 @@ import org.springframework.util.Assert;
 import ru.emitrohin.roox.model.PartnerMapping;
 import ru.emitrohin.roox.repository.CustomerRepository;
 import ru.emitrohin.roox.repository.PartnerMappingRepository;
-import ru.emitrohin.roox.util.exception.ExceptionUtil;
+import ru.emitrohin.roox.util.ExceptionUtil;
 
 import java.util.List;
 
 /**
- * Author: E_Mitrohin
- * Date:   28.02.2017.
+ * Service layer for Partner Mapping
+ *
+ * @author Evgeniy Mitrokhin
  */
-
 @Service
 public class PartnerMappingService {
 

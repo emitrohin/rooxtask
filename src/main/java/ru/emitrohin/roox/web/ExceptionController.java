@@ -14,15 +14,16 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import ru.emitrohin.roox.util.exception.ErrorInfo;
-import ru.emitrohin.roox.util.exception.NotFoundException;
+import ru.emitrohin.roox.util.ErrorInfo;
+import ru.emitrohin.roox.util.NotFoundException;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 
 /**
- * Author: E_Mitrohin
- * Date:   28.02.2017.
+ * Class that handles exceptions using json format
+ *
+ * @author Evgeniy Mitrokhin
  */
 @EnableWebMvc
 @ControllerAdvice

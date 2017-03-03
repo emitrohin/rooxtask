@@ -1,8 +1,9 @@
-package ru.emitrohin.roox.util.exception;
+package ru.emitrohin.roox.util;
 
 /**
- * Author: E_Mitrohin
- * Date:   28.02.2017.
+ * This exception is thrown when nothing was found in database
+ *
+ * @author Evgeniy Mitrokhin
  */
 public class NotFoundException extends RuntimeException {
     public NotFoundException(String message) {

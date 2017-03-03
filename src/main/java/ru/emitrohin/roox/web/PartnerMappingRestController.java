@@ -14,10 +14,10 @@ import java.net.URI;
 import java.util.List;
 
 /**
- * Author: E_Mitrohin
- * Date:   28.02.2017.
+ * Rest API for customer
+ *
+ * @author Evgeniy Mitrokhin
  */
-
 @RestController
 @RequestMapping(value = CustomerRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class PartnerMappingRestController extends BaseRestController {
@@ -29,6 +29,13 @@ public class PartnerMappingRestController extends BaseRestController {
         this.partnerMappingService = partnerMappingService;
     }
 
+    /**
+     * GET method.
+     * Returns List of PartnerMapping by customerId is json
+     *
+     * @param customerId - id of customer
+     * @return list of PartnerMapping from database
+     */
     @GetMapping(value = "/{customerId}/partner-mappings")
     public List<PartnerMapping> getAll(@PathVariable("customerId") int customerId) {
         checkAuthorizedId(customerId);
@@ -36,6 +43,13 @@ public class PartnerMappingRestController extends BaseRestController {
         return partnerMappingService.findAllByCustomerId(customerId);
     }
 
+    /**
+     * GET method.
+     * Returns List of PartnerMapping by customerId is json
+     * Uses @me literal. Id of customer is taken from AuthorizedCustomer.
+     *
+     * @return list of PartnerMapping from database
+     */
     @GetMapping("/@me/partner-mappings")
     public List<PartnerMapping> getAll() {
         int authorizedId = AuthorizedCustomer.id();
@@ -43,6 +57,13 @@ public class PartnerMappingRestController extends BaseRestController {
         return partnerMappingService.findAllByCustomerId(authorizedId);
     }
 
+    /**
+     * GET method.
+     * Returns PartnerMapping by customerId is json
+     *
+     * @param customerId - id of customer
+     * @return PartnerMapping from database
+     */
     @GetMapping(value = "/{customerId}/partner-mappings/{mappingId}")
     public PartnerMapping get(@PathVariable("customerId") int customerId, @PathVariable("mappingId") int mappingId) {
         checkAuthorizedId(customerId);
@@ -50,6 +71,13 @@ public class PartnerMappingRestController extends BaseRestController {
         return partnerMappingService.get(mappingId, customerId);
     }
 
+    /**
+     * GET method.
+     * Returns PartnerMapping by customerId is json
+     * Uses @me literal. Id of customer is taken from AuthorizedCustomer.
+     *
+     * @return PartnerMapping from database
+     */
     @GetMapping("/@me/partner-mappings/{mappingId}")
     public PartnerMapping get(@PathVariable("mappingId") int mappingId) {
         int authorizedId = AuthorizedCustomer.id();
@@ -57,6 +85,14 @@ public class PartnerMappingRestController extends BaseRestController {
         return partnerMappingService.get(mappingId, authorizedId);
     }
 
+    /**
+     * POST method.
+     * Creates new PartnerMapping by customerId and partnerMapping that comes with request body in json
+     *
+     * @param customerId     - id of customer
+     * @param partnerMapping - partnerMapping from request
+     * @return ResponseEntity for partnerMapping
+     */
     @PostMapping(value = "/{customerId}/partner-mappings", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<PartnerMapping> create(@Valid @RequestBody PartnerMapping partnerMapping, @PathVariable("customerId") int customerId) {
         checkAuthorizedId(customerId);
@@ -64,6 +100,14 @@ public class PartnerMappingRestController extends BaseRestController {
         return createResponseEntity(partnerMapping, customerId);
     }
 
+    /**
+     * POST method.
+     * Creates new PartnerMapping by customerId and partnerMapping that comes with request body in json
+     * Uses @me literal. Id of customer is taken from AuthorizedCustomer.
+     *
+     * @param partnerMapping - partnerMapping from request
+     * @return ResponseEntity for partnerMapping
+     */
     @PostMapping(value = "/@me/partner-mappings", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<PartnerMapping> create(@Valid @RequestBody PartnerMapping partnerMapping) {
         int authorizedId = AuthorizedCustomer.id();
@@ -83,7 +127,14 @@ public class PartnerMappingRestController extends BaseRestController {
         return ResponseEntity.created(uriOfNewResource).body(created);
     }
 
-
+    /**
+     * PUT method.
+     * Updates existing PartnerMapping by customerId, partnerMapping that comes with request body in json, and id of existing mapping
+     *
+     * @param partnerMapping - partnerMapping from request
+     * @param customerId - id of customer
+     * @param mappingId - id of PartnerMapping
+     */
     @PutMapping(value = "/{customerId}/partner-mappings/{mappingId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void update(@Valid @RequestBody PartnerMapping partnerMapping, @PathVariable("customerId") int customerId, @PathVariable("mappingId") int mappingId) {
         checkAuthorizedId(customerId);
@@ -92,6 +143,14 @@ public class PartnerMappingRestController extends BaseRestController {
         partnerMappingService.update(partnerMapping, customerId);
     }
 
+    /**
+     * PUT method.
+     * Updates existing PartnerMapping by customerId, partnerMapping that comes with request body in json, and id of existing mapping
+     * Uses @me literal. Id of customer is taken from AuthorizedCustomer.
+     *
+     * @param partnerMapping - partnerMapping from request
+     * @param mappingId - id of PartnerMapping
+     */
     @PutMapping(value = "/@me/partner-mappings/{mappingId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void update(@Valid @RequestBody PartnerMapping partnerMapping, @PathVariable("mappingId") int mappingId) {
         int authorizedId = AuthorizedCustomer.id();
@@ -100,6 +159,13 @@ public class PartnerMappingRestController extends BaseRestController {
         partnerMappingService.update(partnerMapping, authorizedId);
     }
 
+    /**
+     * DELETE method.
+     * Deletes existing PartnerMapping by customerId and id of existing mapping
+     *
+     * @param customerId - id of customer
+     * @param mappingId - id of PartnerMapping
+     */
     @DeleteMapping("/{customerId}/partner-mappings/{mappingId}")
     public void delete(@PathVariable("customerId") int customerId, @PathVariable("mappingId") int mappingId) {
         checkAuthorizedId(customerId);
@@ -107,6 +173,13 @@ public class PartnerMappingRestController extends BaseRestController {
         partnerMappingService.delete(mappingId, customerId);
     }
 
+    /**
+     * DELETE method.
+     * Deletes existing PartnerMapping by customerId and id of existing mapping
+     * Uses @me literal. Id of customer is taken from AuthorizedCustomer.
+     *
+     * @param mappingId - id of PartnerMapping
+     */
     @DeleteMapping("/@me/partner-mappings/{mappingId}")
     public void delete(@PathVariable("mappingId") int mappingId) {
         int authorizedId = AuthorizedCustomer.id();

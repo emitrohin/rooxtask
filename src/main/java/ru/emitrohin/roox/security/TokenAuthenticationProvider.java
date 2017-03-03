@@ -6,8 +6,9 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
 
 /**
- * Author: E_Mitrohin
- * Date:   02.03.2017.
+ * Class for custom token AuthenticationProvider
+ *
+ * @author Evgeniy Mitrokhin
  */
 
 @Component

@@ -7,7 +7,19 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
- * Created by emitrokhin on 27.02.2017.
+ * The {@code Customer} is the representation of customers table.
+ *
+ * Data format
+ *
+ * login - {@code String} - VARCHAR(255) NOT NULL
+ * password - {@code String} - VARCHAR(255) NOT NULL
+ * lastName - {@code String} - VARCHAR(255) NOT NULL
+ * firstName - {@code String} - VARCHAR(255) NOT NULL
+ * middleName - {@code String} - VARCHAR(255) NOT NULL
+ * balance - {@code String} - INTEGER NOT NULL,
+ * enabled - {@code boolean} - BOOLEAN DEFAULT TRUE,
+ *
+ * @author  Evgeniy Mitrokhin
  */
 
 @Entity

@@ -7,7 +7,19 @@ import javax.persistence.*;
 import java.util.Arrays;
 
 /**
- * Created by emitrokhin on 27.02.2017.
+ * The {@code PartnerMapping} is the representation of partner_mapping table.
+ *
+ * Data format
+ *
+ * partnerId - {@code String} - VARCHAR(255) NOT NULL
+ * partnerCustomerId - {@code String} - VARCHAR(255) NOT NULL
+ * lastName - {@code String} - VARCHAR(255) NOT NULL
+ * firstName - {@code String} - VARCHAR(255) NOT NULL
+ * middleName - {@code String} - VARCHAR(255) NOT NULL
+ * avatarImage - {@code byte} - BINARY,
+ * customer - {@code Customer} - INTEGER NOT NULL, join column
+ *
+ * @author  Evgeniy Mitrokhin
  */
 @Entity
 @Table(name = "partner_mapping", uniqueConstraints = {@UniqueConstraint(columnNames = {"customer_id", "partner_id"}, name = "ix_customer_id_partner_id")})
@@ -31,7 +43,7 @@ public class PartnerMapping extends BaseEntity{
     private String middleName;
 
     @Column(name = "avatar_image")
-    private byte[]  avatarImage;
+    private byte[] avatarImage;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "customer_id", nullable = false)

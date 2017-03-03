@@ -8,13 +8,22 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Author: E_Mitrohin
- * Date:   28.02.2017.
+ * Utility class that uses jacksonObjectMapper to objects to json
+ *
+ * @author Evgeniy Mitrokhin
  */
 public class JsonUtil {
 
     private static final ObjectMapper jacksonObjectMapper = new ObjectMapper();
 
+    /**
+     * Read json string and write it to list of objects
+     *
+     * @param json - json string
+     * @param clazz - Class to read
+     * @param <T> - any parserable object
+     * @return list of values
+     */
     public static <T> List<T> readValues(String json, Class<T> clazz) {
         ObjectReader reader = jacksonObjectMapper.readerFor(clazz);
         try {
@@ -24,6 +33,14 @@ public class JsonUtil {
         }
     }
 
+    /**
+     * Read json string and write it objects
+     *
+     * @param json - json string
+     * @param clazz - Class to read
+     * @param <T> - any parserable object
+     * @return list of values
+     */
     public static <T> T readValue(String json, Class<T> clazz) {
         try {
             return jacksonObjectMapper.readValue(json, clazz);
@@ -32,6 +49,13 @@ public class JsonUtil {
         }
     }
 
+    /**
+     * Takes an objects and create json string from it
+     *
+     * @param obj - any parserable object
+     * @param <T> - Class to read
+     * @return json string
+     */
     public static <T> String writeValue(T obj) {
         try {
             return jacksonObjectMapper.writeValueAsString(obj);

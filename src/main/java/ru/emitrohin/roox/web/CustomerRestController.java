@@ -11,10 +11,10 @@ import ru.emitrohin.roox.security.AuthorizedCustomer;
 import ru.emitrohin.roox.service.CustomerService;
 
 /**
- * Author: E_Mitrohin
- * Date:   28.02.2017.
+ * Rest API for customer
+ *
+ * @author Evgeniy Mitrokhin
  */
-
 @RestController
 @RequestMapping(value = CustomerRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class CustomerRestController extends BaseRestController {
@@ -28,6 +28,13 @@ public class CustomerRestController extends BaseRestController {
         this.customerService = customerService;
     }
 
+    /**
+     * GET method.
+     * Return customer json
+     *
+     * @param customerId - id of customer
+     * @return customer from database
+     */
     @GetMapping("/{customerId}")
     public Customer get(@PathVariable("customerId") int customerId) {
         LOG.info("Customer get {}", customerId);
@@ -35,6 +42,13 @@ public class CustomerRestController extends BaseRestController {
         return customerService.get(customerId);
     }
 
+    /**
+     * GET method.
+     * Return customer json
+     * Uses @me literal. Id of customer is taken from AuthorizedCustomer.
+     *
+     * @return customer from database
+     */
     @GetMapping("/@me")
     public Customer get() {
         int authorizedId = AuthorizedCustomer.id();

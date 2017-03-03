@@ -9,14 +9,21 @@ import java.util.Collections;
 
 import static java.util.Objects.requireNonNull;
 
+
 /**
- * Author: E_Mitrohin
- * Date:   28.02.2017.
+ * Secured class for customer authorization
+ *
+ * @author Evgeniy Mitrokhin
  */
 public class AuthorizedCustomer extends User {
 
     private final Customer customer;
 
+    /**
+     * Creates AuthorizedCustomer object from customer object
+     *
+     * @param customer
+     */
     public AuthorizedCustomer(Customer customer) {
         super(customer.getLogin(), customer.getPassword(), customer.isEnabled(), true, true, true, Collections.emptyList());
         this.customer = customer;
@@ -37,6 +44,11 @@ public class AuthorizedCustomer extends User {
         return customer;
     }
 
+    /**
+     * Returns an id of authenticated customer
+     *
+     * @return authenticated customer id
+     */
     public static int id() {
         return get().customer.getId();
     }

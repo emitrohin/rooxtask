@@ -1,8 +1,9 @@
-package ru.emitrohin.roox.util.exception;
+package ru.emitrohin.roox.util;
 
 /**
- * Author: E_Mitrohin
- * Date:   28.02.2017.
+ * Utilities that check condition and if necessary throws exceptions
+ *
+ * @author Evgeniy Mitrokhin
  */
 public class ExceptionUtil {
     private ExceptionUtil() {

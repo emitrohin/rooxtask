@@ -1,8 +1,9 @@
-package ru.emitrohin.roox.util.exception;
+package ru.emitrohin.roox.util;
 
 /**
- * Author: E_Mitrohin
- * Date:   28.02.2017.
+ * This class is representation for error message that delivers in case of exception in json format
+ *
+ * @author Evgeniy Mitrokhin
  */
 public class ErrorInfo {
 

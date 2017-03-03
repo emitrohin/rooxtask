@@ -7,9 +7,10 @@ import org.springframework.data.domain.Persistable;
 import javax.persistence.*;
 
 /**
- * Created by emitrokhin on 27.02.2017.
+ * The {@code BaseEntity} is the base super class for all other entities. A
+ *
+ * @author  Evgeniy Mitrokhin
  */
-
 @MappedSuperclass
 @Access(AccessType.FIELD)
 public class BaseEntity implements Persistable<Integer> {
@@ -21,9 +22,13 @@ public class BaseEntity implements Persistable<Integer> {
     private Integer id;
 
     BaseEntity() {
-
     }
 
+    /**
+     * Creates new entity with specified id
+     *
+     * @param id
+     */
     BaseEntity(Integer id) {
         this.id = id;
     }
@@ -36,6 +41,12 @@ public class BaseEntity implements Persistable<Integer> {
         this.id = id;
     }
 
+
+    /**
+     * Method checks if we already have some if
+     *
+     * @return true if id is null vaule
+     */
     @Override
     @JsonIgnore
     public boolean isNew() {

@@ -6,14 +6,15 @@ import org.springframework.security.core.GrantedAuthority;
 import java.util.Collection;
 
 /**
- * Author: E_Mitrohin
- * Date:   02.03.2017.
+ * Custom wrapper for Authentication to hold token and AuthorizedCustomer information
+ *
+ * @author Evgeniy Mitrokhin
  */
 class TokenAuthentication implements Authentication {
 
     private final String token;
-    private boolean isAuthenticated;
     private final AuthorizedCustomer principal;
+    private boolean isAuthenticated;
 
 
     public TokenAuthentication(String token, boolean isAuthenticated, AuthorizedCustomer principal) {
