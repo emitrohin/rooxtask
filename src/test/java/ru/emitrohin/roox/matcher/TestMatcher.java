@@ -4,10 +4,6 @@ import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import ru.emitrohin.roox.web.json.JsonUtil;
 
-/**
- * GKislin
- * 05.01.2015.
- */
 abstract class TestMatcher<T> extends BaseMatcher<String> {
     private final T expected;
 
